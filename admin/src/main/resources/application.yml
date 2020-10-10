@@ -23,4 +23,3 @@ secure:
       - /home/**
       - /product/**
       - /brand/**
-      - /hello/**/**

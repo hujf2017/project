@@ -9,7 +9,7 @@ public class SmUser implements Serializable {
     private String userPk;
 
     @ApiModelProperty(value = "用户id")
-    private String userId;
+    private Integer userId;
 
     @ApiModelProperty(value = "用户名")
     private String userName;
@@ -32,8 +32,8 @@ public class SmUser implements Serializable {
     @ApiModelProperty(value = "最后修改人")
     private String modifier;
 
-    @ApiModelProperty(value = "用户状态")
-    private String status;
+    @ApiModelProperty(value = "用户状态1正常2冻结")
+    private Integer status;
 
     @ApiModelProperty(value = "登录token")
     private String accessToken;
@@ -48,11 +48,11 @@ public class SmUser implements Serializable {
         this.userPk = userPk;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -112,11 +112,11 @@ public class SmUser implements Serializable {
         this.modifier = modifier;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

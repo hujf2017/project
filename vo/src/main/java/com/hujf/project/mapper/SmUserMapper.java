@@ -19,4 +19,6 @@ public interface SmUserMapper {
     int updateByExampleSelective(@Param("record") SmUser record, @Param("example") SmUserExample example);
 
     int updateByExample(@Param("record") SmUser record, @Param("example") SmUserExample example);
+
+    Integer getLastId();
 }

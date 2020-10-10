@@ -3,7 +3,7 @@
 <mapper namespace="com.hujf.project.mapper.SmUserMapper">
   <resultMap id="BaseResultMap" type="com.hujf.project.model.SmUser">
     <result column="user_pk" jdbcType="VARCHAR" property="userPk" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
@@ -11,7 +11,7 @@
     <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
     <result column="modifier" jdbcType="VARCHAR" property="modifier" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -101,10 +101,10 @@
       user_password, user_phone, create_time, 
       modified_time, creator, modifier, 
       status, access_token)
-    values (#{userPk,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+    values (#{userPk,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
       #{userPassword,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifiedTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR})
+      #{status,jdbcType=INTEGER}, #{accessToken,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hujf.project.model.SmUser">
     insert into sm_user
@@ -148,7 +148,7 @@
         #{userPk,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER},
       </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
@@ -172,7 +172,7 @@
         #{modifier,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="accessToken != null">
         #{accessToken,jdbcType=VARCHAR},
@@ -185,6 +185,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="getLastId" resultType="java.lang.Integer">
+    select user_id from sm_user order by user_id desc limit 1
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update sm_user
     <set>
@@ -192,7 +195,7 @@
         user_pk = #{record.userPk,jdbcType=VARCHAR},
       </if>
       <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null">
         user_name = #{record.userName,jdbcType=VARCHAR},
@@ -216,7 +219,7 @@
         modifier = #{record.modifier,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.accessToken != null">
         access_token = #{record.accessToken,jdbcType=VARCHAR},
@@ -229,7 +232,7 @@
   <update id="updateByExample" parameterType="map">
     update sm_user
     set user_pk = #{record.userPk,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_password = #{record.userPassword,jdbcType=VARCHAR},
       user_phone = #{record.userPhone,jdbcType=VARCHAR},
@@ -237,7 +240,7 @@
       modified_time = #{record.modifiedTime,jdbcType=TIMESTAMP},
       creator = #{record.creator,jdbcType=VARCHAR},
       modifier = #{record.modifier,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
       access_token = #{record.accessToken,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
