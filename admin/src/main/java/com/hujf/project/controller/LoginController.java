@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @description: 登录接口
  */
 
-@Api(value = "login",description = "登录相关接口")
+@Api(value = "login", description = "登录相关接口")
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -26,9 +26,17 @@ public class LoginController {
     MemberService memberService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ApiOperation(value = "register",notes = "注册相关",httpMethod="POST")
-    public CommonResult register(String username,String password,String telephone, String authCode){
-        memberService.register(username,password,telephone,authCode);
-        return CommonResult.success(null,"注册成功");
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "username", value = "用户名"),
+            @ApiImplicitParam(paramType = "query", name = "password", value = "密码"),
+            @ApiImplicitParam(paramType = "query", name = "telephone", value = "电话"),
+            @ApiImplicitParam(paramType = "query", name = "authCode", value = "验证码")
+    })
+    @ApiOperation(value = "register", notes = "注册相关", httpMethod = "POST")
+    public CommonResult register(String username, String password, String telephone, String authCode) {
+        memberService.register(username, password, telephone, authCode);
+        return CommonResult.success(null, "注册成功");
     }
+
+
 }

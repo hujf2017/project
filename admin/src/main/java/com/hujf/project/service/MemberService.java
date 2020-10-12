@@ -1,5 +1,7 @@
 package com.hujf.project.service;
 
+import com.hujf.project.model.SmUser;
+
 /**
  * @author Hujf
  * @title: MemberService
@@ -9,4 +11,5 @@ package com.hujf.project.service;
 public interface MemberService {
 
     void register(String username,String password,String telephone,String authCode);
+
 }
