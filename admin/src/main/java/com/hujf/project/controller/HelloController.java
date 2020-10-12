@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hello")
 public class HelloController {
 
-    @ApiOperation(value = "getHello" , notes = "登录接口"
+    @ApiOperation(value = "getHello" , notes = "test"
             , httpMethod = "POST", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/get/hello", method = RequestMethod.POST)
     public CommonResult<String> getHello(){
@@ -28,7 +28,7 @@ public class HelloController {
     }
 
 
-    @ApiOperation(value = "getHello2" , notes = "登录2"
+    @ApiOperation(value = "getHello2" , notes = "test2"
             , httpMethod = "GET")
     @RequestMapping(value = "/get/hello2", method = RequestMethod.GET)
     public String getHello2(){

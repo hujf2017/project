@@ -1,6 +1,7 @@
 package com.hujf.project.service.impl;
 
 import com.hujf.project.common.exception.ApiException;
+import com.hujf.project.common.util.RedisUtil;
 import com.hujf.project.common.util.UUIDUtil;
 import com.hujf.project.mapper.SmUserMapper;
 import com.hujf.project.model.SmUser;
@@ -23,6 +24,9 @@ public class MemberServiceImpl implements MemberService {
     @Resource
     private SmUserMapper smUserMapper;
 
+    @Resource
+    private RedisUtil redisUtil;
+
     @Override
     public void register(String username, String password, String telephone, String authCode) {
         //1.查询是否有这个用户。
@@ -32,6 +36,10 @@ public class MemberServiceImpl implements MemberService {
         List<SmUser> smUserList = smUserMapper.selectByExample(smUserExample);
         if(!smUserList.isEmpty()){
             throw new ApiException("用户已存在");
+        }
+        //2.查询是否有验证码
+        if(!redisUtil.get(telephone).equals(authCode)){
+            throw new ApiException("验证码错误");
         }
 
         SmUser smUser = new SmUser();
@@ -53,4 +61,18 @@ public class MemberServiceImpl implements MemberService {
         smUserMapper.insertSelective(smUser);
 
     }
+
+    @Override
+    public String sendAuthCode(String telephone) {
+        String code = "123456";
+        redisUtil.set(telephone,code,300);
+        return code;
+    }
+
+    @Override
+    public void login(String username, String password) {
+        //判断用户名和密码是否正确
+    }
+
+
 }

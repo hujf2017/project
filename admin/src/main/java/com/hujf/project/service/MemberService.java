@@ -12,4 +12,7 @@ public interface MemberService {
 
     void register(String username,String password,String telephone,String authCode);
 
+    String sendAuthCode(String telephone);
+
+    void login(String username, String password);
 }
