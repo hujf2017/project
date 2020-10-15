@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             registry.antMatchers(url).permitAll();
         }
 
-        //关闭跨站请求防护及不使用session
+        //关闭跨站请求 post问题
         registry.and().csrf().disable();
 
     }

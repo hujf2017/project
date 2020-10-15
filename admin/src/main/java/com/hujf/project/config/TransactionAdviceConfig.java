@@ -23,7 +23,7 @@ import java.util.Map;
 @Aspect
 public class TransactionAdviceConfig {
 
-    private static final String AOP_POINTCUT_EXPRESSION = "execution (* com.hujf.service.impl.*.*(..))";
+    private static final String AOP_POINTCUT_EXPRESSION = "execution (* com.hujf.project.service.impl.*.*(..))";
 
     private static final int TX_METHOD_TIMEOUT = 5000;
 

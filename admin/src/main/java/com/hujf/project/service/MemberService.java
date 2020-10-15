@@ -14,5 +14,5 @@ public interface MemberService {
 
     String sendAuthCode(String telephone);
 
-    void login(String username, String password);
+    String login(String username, String password);
 }

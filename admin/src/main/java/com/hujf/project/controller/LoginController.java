@@ -46,9 +46,10 @@ public class LoginController {
         return CommonResult.success(code);
     }
 
+    @ApiOperation(value = "登录",notes = "登录",httpMethod = "POST")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public CommonResult login(String username, String password){
-        memberService.login(username,password);
-        return CommonResult.success("");
+        return CommonResult.success(memberService.login(username,password));
     }
 
 }
