@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 /**
  * @author Hujf
@@ -32,7 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }
 
         //关闭跨站请求 post问题
-        registry.and().csrf().disable();
-
+        registry.and().csrf().disable()
+                //过滤全部资源
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                // 不需要session
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                ;
     }
 }
