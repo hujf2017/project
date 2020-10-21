@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hujf.project.mapper.SmUserRoleRelationMapper">
+  <resultMap id="BaseResultMap" type="com.hujf.project.model.SmUserRoleRelation">
+    <result column="user_role_pk" jdbcType="VARCHAR" property="userRolePk" />
+    <result column="role_pk" jdbcType="VARCHAR" property="rolePk" />
+    <result column="user_pk" jdbcType="VARCHAR" property="userPk" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="creation_time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_role_pk, role_pk, user_pk, creator, creation_time, user_id
+  </sql>
+  <select id="selectByExample" parameterType="com.hujf.project.model.SmUserRoleRelationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sm_user_role_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.hujf.project.model.SmUserRoleRelationExample">
+    delete from sm_user_role_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hujf.project.model.SmUserRoleRelation">
+    insert into sm_user_role_relation (user_role_pk, role_pk, user_pk, 
+      creator, creation_time, user_id
+      )
+    values (#{userRolePk,jdbcType=VARCHAR}, #{rolePk,jdbcType=VARCHAR}, #{userPk,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{creationTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hujf.project.model.SmUserRoleRelation">
+    insert into sm_user_role_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userRolePk != null">
+        user_role_pk,
+      </if>
+      <if test="rolePk != null">
+        role_pk,
+      </if>
+      <if test="userPk != null">
+        user_pk,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="creationTime != null">
+        creation_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userRolePk != null">
+        #{userRolePk,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePk != null">
+        #{rolePk,jdbcType=VARCHAR},
+      </if>
+      <if test="userPk != null">
+        #{userPk,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creationTime != null">
+        #{creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hujf.project.model.SmUserRoleRelationExample" resultType="java.lang.Long">
+    select count(*) from sm_user_role_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sm_user_role_relation
+    <set>
+      <if test="record.userRolePk != null">
+        user_role_pk = #{record.userRolePk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rolePk != null">
+        role_pk = #{record.rolePk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPk != null">
+        user_pk = #{record.userPk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationTime != null">
+        creation_time = #{record.creationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sm_user_role_relation
+    set user_role_pk = #{record.userRolePk,jdbcType=VARCHAR},
+      role_pk = #{record.rolePk,jdbcType=VARCHAR},
+      user_pk = #{record.userPk,jdbcType=VARCHAR},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      creation_time = #{record.creationTime,jdbcType=TIMESTAMP},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,84 +1,72 @@
-//package com.hujf.project.security.component;
-//
-//import cn.hutool.core.util.StrUtil;
-//import com.hujf.project.common.util.JwtTokenUtil;
-//import com.hujf.project.security.config.IgnoreUrlsConfig;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.http.HttpMethod;
-//import org.springframework.stereotype.Component;
-//import org.springframework.util.AntPathMatcher;
-//import org.springframework.util.PathMatcher;
-//
-//import javax.servlet.*;
-//import javax.servlet.annotation.WebFilter;
-//import javax.servlet.http.HttpServletRequest;
-//import java.io.IOException;
-//
-///**
-// * @author Hujf
-// * @title: DynamicSecurityFilter
-// * @date 2020/10/17 0017下午 2:21
-// * @description: TODO
-// */
-//@WebFilter(filterName = "piceaFilter", urlPatterns = "/*")
-//@Component
-//public class DynamicSecurityFilter implements Filter {
-//    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicSecurityFilter.class);
-//
-////    @Autowired
-////    private UserService userService;
-//
-//    @Value("${jwt.tokenHeader}")
-//    private String tokenHeader;
-//    @Value("${jwt.tokenHead}")
-//    private String tokenHead;
-//
-//    @Autowired
-//    private IgnoreUrlsConfig ignoreUrlsConfig;
-//    @Autowired
-//    private JwtTokenUtil jwtTokenUtil;
-//
-//    @Override
-//    public void init(FilterConfig filterConfig) throws ServletException {
-//        String url = filterConfig.getInitParameter("URL");
-//        System.out.println("我是过滤器的初始化方法！URL=" + url + "，生活开始.........");
-//    }
-//
-//
-//    @Override
-//    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-//
-//        HttpServletRequest request = (HttpServletRequest) servletRequest;
-//        // 获取端口号
-//        int localPort = request.getLocalPort();
-//        System.out.println(localPort + "-----------------------------------------------------------------------------");
-//        //OPTIONS请求直接放行
-//        if (request.getMethod().equals(HttpMethod.OPTIONS.toString())) {
-//            filterChain.doFilter(servletRequest, servletResponse);
-////            return;
-//        }
-//        //白名单请求直接放行
-//        PathMatcher pathMatcher = new AntPathMatcher();
-//        System.out.println("白名单：" + ignoreUrlsConfig.getUrls().toString());
-//        System.out.println("请求的路径：" + request.getRequestURI() +
-//                "==============================================================");
-//        for (String path : ignoreUrlsConfig.getUrls()) {
-//            if (pathMatcher.match(path, request.getRequestURI())) {
-//                filterChain.doFilter(servletRequest, servletResponse);
-//                return;
-//            }
-//        }
-//
-//        //获得header里的token
-//        String authHeader = request.getHeader(this.tokenHeader);
-//        System.out.println("authHeader:" + authHeader);
-//        if (!StrUtil.isEmpty(authHeader)) {
-//
-//            String name = jwtTokenUtil.getUserNameFromToken(tokenHeader);
-//            LOGGER.info("checking phoneAndTime:{}", name);
-//        }
-//    }
-//}
+package com.hujf.project.security.component;
+
+import com.hujf.project.security.config.IgnoreUrlsConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.access.SecurityMetadataSource;
+import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
+import org.springframework.security.access.intercept.InterceptorStatusToken;
+import org.springframework.security.web.FilterInvocation;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
+/**
+ * 动态权限过滤器，用于实现基于路径的动态权限过滤
+ * Created by macro on 2020/2/7.
+ */
+public class DynamicSecurityFilter extends AbstractSecurityInterceptor implements Filter {
+
+    @Autowired
+    private IgnoreUrlsConfig ignoreUrlsConfig;
+
+
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        FilterInvocation fi = new FilterInvocation(servletRequest, servletResponse, filterChain);
+        //OPTIONS请求直接放行
+        if(request.getMethod().equals(HttpMethod.OPTIONS.toString())){
+            fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+            return;
+        }
+        //白名单请求直接放行
+        PathMatcher pathMatcher = new AntPathMatcher();
+        for (String path : ignoreUrlsConfig.getUrls()) {
+            if(pathMatcher.match(path,request.getRequestURI())){
+                fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+                return;
+            }
+        }
+        //此处会调用AccessDecisionManager中的decide方法进行鉴权操作
+        InterceptorStatusToken token = super.beforeInvocation(fi);
+        try {
+            fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
+        } finally {
+            super.afterInvocation(token, null);
+        }
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public Class<?> getSecureObjectClass() {
+        return FilterInvocation.class;
+    }
+
+    @Override
+    public SecurityMetadataSource obtainSecurityMetadataSource() {
+        return null;
+    }
+
+}
