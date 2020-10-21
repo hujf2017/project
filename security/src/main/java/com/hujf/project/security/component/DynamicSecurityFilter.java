@@ -58,7 +58,7 @@
 //        //OPTIONS请求直接放行
 //        if (request.getMethod().equals(HttpMethod.OPTIONS.toString())) {
 //            filterChain.doFilter(servletRequest, servletResponse);
-//            return;
+////            return;
 //        }
 //        //白名单请求直接放行
 //        PathMatcher pathMatcher = new AntPathMatcher();

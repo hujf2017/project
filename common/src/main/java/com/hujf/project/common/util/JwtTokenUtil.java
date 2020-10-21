@@ -171,4 +171,16 @@ public class JwtTokenUtil {
         }
         return false;
     }
+
+
+    /**
+     * 获取用户角色
+     * @param token
+     * @return
+     */
+    public static String getUserRole(String token){
+        Claims claims = Jwts.parser().parseClaimsJws(token).getBody();
+        return claims.get("rol").toString();
+    }
+
 }
