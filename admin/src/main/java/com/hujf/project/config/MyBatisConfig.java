@@ -13,6 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"com.hujf.project.mapper"})
+@MapperScan({"com.hujf.project.mapper","com.hujf.project.dao"})
 public class MyBatisConfig {
 }

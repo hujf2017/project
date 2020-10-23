@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @description: TODO
  */
 
-@Api(tags = "HelloController", description = "hello")
+@Api(value = "HelloController", tags = "测试接口hello")
 @RestController()
 @RequestMapping("/hello")
 public class HelloController {

@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @description: 登录接口
  */
 
-@Api(value = "login", description = "登录相关接口")
+@Api(value = "login",tags = "登录接口")
 @RestController
 @RequestMapping("/login")
 public class LoginController {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hujf.project.dao.SmUserRoleRelationDao">
+    <select id="getRoleList" resultMap="com.hujf.project.mapper.SmRoleMapper.BaseResultMap">
+        SELECT	r.* FROM sm_role r
+        LEFT JOIN sm_user_role_relation sr ON r.role_pk = sr.role_pk
+        where sr.user_pk =  = #{memberId}
+    </select>
+    <select id="getUserResource" resultType="com.hujf.project.model.SmResource">
+        SELECT 	ss.resource_name as resourceName,
+ss.create_time as createTime,
+ss.creator  ,
+ss.resource_url as resourceUrl,
+ss.resource_pk as resourcePk FROM sm_user_role_relation so
+        LEFT JOIN sm_role sr ON so.role_pk = sr.role_pk
+        left join sm_role_resource_relation sa on sa.role_pk = sr.role_pk
+        left join sm_resource ss on ss.resource_pk = sa.resource_pk
+        where so.user_pk = #{userPk}
+    </select>
+
+</mapper>

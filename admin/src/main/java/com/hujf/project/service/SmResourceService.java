@@ -13,4 +13,6 @@ import java.util.List;
 public interface SmResourceService {
 
     List<SmResource> listAll();
+
+    int addResource(String path,String reName);
 }

@@ -1,6 +1,9 @@
 package com.hujf.project.service;
 
 import com.hujf.project.model.SmUser;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.List;
 
 /**
  * @author Hujf
@@ -15,4 +18,11 @@ public interface MemberService {
     String sendAuthCode(String telephone);
 
     String login(String username, String password);
+
+    int updateRole(String memberId, String roles);
+
+    SmUser getCurrentUser();
+
+    UserDetails loadUserByUsername(String username);
+
 }

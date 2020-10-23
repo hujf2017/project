@@ -1,16 +1,17 @@
 package com.hujf.project.config;
 
+import com.hujf.project.dto.SmUserDetails;
 import com.hujf.project.model.SmResource;
 import com.hujf.project.security.component.DynamicSecurityService;
 import com.hujf.project.security.config.SecurityConfig;
 import com.hujf.project.service.MemberService;
 import com.hujf.project.service.SmResourceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,11 +26,17 @@ import java.util.concurrent.ConcurrentHashMap;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AdminSecurityConfig extends SecurityConfig {
-
-    @Autowired
-    private MemberService memberService;
     @Resource
     private SmResourceService resourceService;
+    @Resource
+    private MemberService memberService;
+
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        //获取登录用户信息
+        return username -> memberService.loadUserByUsername(username);
+    }
 
 
     @Bean
@@ -40,7 +47,7 @@ public class AdminSecurityConfig extends SecurityConfig {
                 Map<String, ConfigAttribute> map = new ConcurrentHashMap<>();
                 List<SmResource> resourceList = resourceService.listAll();
                 for (SmResource resource : resourceList) {
-                    map.put(resource.getResourceUrl(), new org.springframework.security.access.SecurityConfig(resource.getResourceName()));
+                    map.put(resource.getResourceUrl(), new org.springframework.security.access.SecurityConfig(resource.getResourcePk()+ ":" +resource.getResourceName()));
                 }
                 return map;
             }
