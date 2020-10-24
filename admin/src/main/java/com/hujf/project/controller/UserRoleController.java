@@ -72,6 +72,12 @@ public class UserRoleController {
         return CommonResult.success(roleService.getAllRole());
     }
 
+    @ApiOperation(value ="展示所有资源列表", httpMethod = "POST")
+    @RequestMapping(value = "/resource/all")
+    public CommonResult<List> getAllResourceList(){
+        return CommonResult.success(smResourceService.getAllResource());
+    }
+
     @ApiOperation(value ="根据路径生成资源列表", httpMethod = "POST")
     @RequestMapping(value = "/resource/add")
     public CommonResult addResource(String path,String reName){
@@ -90,7 +96,7 @@ public class UserRoleController {
 
     @ApiOperation(value ="将资源分配给角色", httpMethod = "POST")
     @ApiImplicitParams({
-//            @ApiImplicitParam( name = "resources", value = "资源组"),
+            @ApiImplicitParam( name = "resources", value = "资源组",allowMultiple=true),
     })
     @RequestMapping(value = "/roleAndResource/add")
     public CommonResult addResourceToRole(String roleId, @RequestParam List<String> resources){

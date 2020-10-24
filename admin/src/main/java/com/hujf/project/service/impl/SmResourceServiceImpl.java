@@ -42,4 +42,9 @@ public class SmResourceServiceImpl implements SmResourceService {
         int num = smResourceMapper.insertSelective(smResource);
         return num;
     }
+
+    @Override
+    public List getAllResource(){
+        return smResourceMapper.selectByExample(new SmResourceExample());
+    }
 }

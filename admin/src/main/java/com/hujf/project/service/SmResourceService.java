@@ -15,4 +15,6 @@ public interface SmResourceService {
     List<SmResource> listAll();
 
     int addResource(String path,String reName);
+
+    List getAllResource();
 }
