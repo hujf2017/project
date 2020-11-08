@@ -13,7 +13,7 @@ public class TopicDemo {
     public static void main(String []args) throws MQClientException {
         DefaultMQProducer producer = new DefaultMQProducer("hujf");
 
-        producer.setNamesrvAddr("101.7.163.175:9876");
+        producer.setNamesrvAddr("116.62.138.50:9876");
         producer.start();
 
         producer.createTopic("brokertest","my-topic",4);
