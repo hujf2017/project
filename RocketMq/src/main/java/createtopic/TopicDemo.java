@@ -1,4 +1,4 @@
-package createTopic;
+package createtopic;
 
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -7,7 +7,7 @@ import org.apache.rocketmq.client.producer.DefaultMQProducer;
  * @author Hujf
  * @title: TopicDemo
  * @date 2020/11/8 0008下午 3:06
- * @description: TODO
+ * @description: 创建topic
  */
 public class TopicDemo {
     public static void main(String []args) throws MQClientException {
