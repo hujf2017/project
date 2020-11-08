@@ -107,6 +107,10 @@ public class UserRoleController {
         return CommonResult.failed();
     }
 
-
+    @ApiOperation(value = "展示所有用户",httpMethod = "POST")
+    @RequestMapping(value = "/showAllMember")
+    public CommonResult showAllMember(){
+        return CommonResult.success(memberService.getAllUsers());
+    }
 
 }

@@ -125,6 +125,11 @@ public class MemberServiceImpl implements MemberService {
         throw new UsernameNotFoundException("用户不存在");
     }
 
+    @Override
+    public List<SmUser> getAllUsers() {
+        return smUserMapper.selectByExample(new SmUserExample());
+    }
+
     private List<SmResource> getResourceList(String userPk) {
         List<SmResource> resourceList = smUserRoleRelationDao.getUserResource(userPk);
 

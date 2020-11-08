@@ -25,4 +25,6 @@ public interface MemberService {
 
     UserDetails loadUserByUsername(String username);
 
+    List<SmUser> getAllUsers();
+
 }
