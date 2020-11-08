@@ -9,12 +9,14 @@
         <module name="security" />
         <module name="common" />
         <module name="vo" />
+        <module name="RocketMq" />
         <module name="admin" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="RocketMq" options="-parameters" />
       <module name="admin" options="-parameters" />
       <module name="common" options="-parameters" />
       <module name="project" options="-parameters" />
