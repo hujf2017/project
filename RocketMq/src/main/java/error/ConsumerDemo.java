@@ -1,4 +1,4 @@
-package consumer;
+package error;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
@@ -22,7 +22,7 @@ public class ConsumerDemo {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("hujf-consumer");
         consumer.setNamesrvAddr("101.7.163.175:9876");
         //订阅消息 *代表全部
-        consumer.subscribe("my-topic", "and||or");
+        consumer.subscribe("my-topic", "*");
 
         consumer.setMessageModel(MessageModel.CLUSTERING);
         //MessageListenerConcurrently 并发型
@@ -38,7 +38,10 @@ public class ConsumerDemo {
                     }
                 }
                 System.out.println("收到消息->" + list);
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                if(list.get(0).getReconsumeTimes()>=3){
+                    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                }
+                return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
         });
         consumer.start();
