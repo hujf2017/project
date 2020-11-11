@@ -14,11 +14,11 @@ public class SyncProduce {
     public static  void main(String[] args) throws Exception{
         DefaultMQProducer producer = new DefaultMQProducer("hujf");
 
-        producer.setNamesrvAddr("101.7.163.175:9876");
+        producer.setNamesrvAddr("116.62.138.50:9876;116.62.138.50:9877");
         producer.start();
 
         // 发送消息 三个参数 一个topic名  一个标签 一个内容
-        String msg = "我的第一个消息5";
+        String msg = "我的第一个消息6";
         Message message = new Message("my-topic","and",msg.getBytes("UTF-8"));
         SendResult sendResult =  producer.send(message);
         System.out.println("消息id:"+sendResult.getMsgId());

@@ -49,6 +49,7 @@
         <vo.version>1.0-SNAPSHOT</vo.version>
         <security.version>1.0-SNAPSHOT</security.version>
         <rocketmq.version>4.7.1</rocketmq.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencies>
@@ -87,6 +88,11 @@
             <artifactId>rocketmq-all</artifactId>
             <version>${rocketmq.version}</version>
             <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.1.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

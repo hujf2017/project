@@ -15,7 +15,7 @@ public class AsyncProducer {
     public static void main(String []args) throws Exception {
         DefaultMQProducer producer = new DefaultMQProducer("hujf");
 
-        producer.setNamesrvAddr("101.7.163.175:9876");
+        producer.setNamesrvAddr("116.62.138.50:9876;116.62.138.50:9877");
         producer.start();
 
         //发送消息

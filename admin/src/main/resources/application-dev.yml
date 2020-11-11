@@ -27,3 +27,10 @@ jwt:
   secret: mall-admin-secret #JWT加解密使用的密钥
   expiration: 604800 #JWT的超期限时间(60*60*24*7)
   tokenHead: 'Bearer ' #JWT负载中拿到开头
+
+
+Spring:
+  rocketmq:
+    nameServer: 116.62.138.50:9876
+    producer:
+      group: my-group
