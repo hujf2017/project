@@ -8,10 +8,10 @@
     </select>
     <select id="getUserResource" resultType="com.hujf.project.model.SmResource">
         SELECT 	ss.resource_name as resourceName,
-ss.create_time as createTime,
-ss.creator  ,
-ss.resource_url as resourceUrl,
-ss.resource_pk as resourcePk FROM sm_user_role_relation so
+        ss.create_time as createTime,
+        ss.creator  ,
+        ss.resource_url as resourceUrl,
+        ss.resource_pk as resourcePk FROM sm_user_role_relation so
         LEFT JOIN sm_role sr ON so.role_pk = sr.role_pk
         left join sm_role_resource_relation sa on sa.role_pk = sr.role_pk
         left join sm_resource ss on ss.resource_pk = sa.resource_pk

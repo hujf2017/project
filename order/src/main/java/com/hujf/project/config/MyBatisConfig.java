@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-@MapperScan({"com.hujf.project.mapper", "com.hujf.project.dao"})
+@MapperScan({"com.hujf.project.mapper","com.hujf.project.dao"})
 public class MyBatisConfig {
 }
