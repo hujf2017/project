@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev #默认为开发环境
+  security:
+    user:
+      name: admin
+      password: admin
+
 swagger:
   host:
     url: 127.0.0.1:${server.port}
@@ -26,6 +31,8 @@ secure:
       - /login/**
 
 mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations:
     - classpath:dao/*.xml
     - classpath*:com/**/mapper/*.xml
