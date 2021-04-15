@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="vo" />
+        <module name="admin" />
         <module name="security" />
         <module name="common" />
-        <module name="vo" />
+        <module name="es" />
         <module name="RocketMq" />
-        <module name="admin" />
       </profile>
     </annotationProcessing>
   </component>
@@ -19,6 +20,7 @@
       <module name="RocketMq" options="-parameters" />
       <module name="admin" options="-parameters" />
       <module name="common" options="-parameters" />
+      <module name="es" options="-parameters" />
       <module name="project" options="-parameters" />
       <module name="security" options="-parameters" />
       <module name="vo" options="-parameters" />

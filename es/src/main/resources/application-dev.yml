@@ -1,0 +1,11 @@
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: 39.98.144.60:9300
+  elasticsearch:
+    rest:
+      uris: http://39.98.144.60:9200
+      username: elastic
+      password: 123456
