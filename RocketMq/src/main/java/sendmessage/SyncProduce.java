@@ -14,7 +14,7 @@ public class SyncProduce {
     public static  void main(String[] args) throws Exception{
         DefaultMQProducer producer = new DefaultMQProducer("hujf");
 
-        producer.setNamesrvAddr("116.62.138.50:9876;116.62.138.50:9877");
+        producer.setNamesrvAddr("hadoop100:9876");
         producer.start();
 
         // 发送消息 三个参数 一个topic名  一个标签 一个内容

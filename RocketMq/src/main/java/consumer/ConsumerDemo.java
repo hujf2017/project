@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class ConsumerDemo {
     public static void main(String[] args) throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("hujf-consumer");
-        consumer.setNamesrvAddr("116.62.138.50:9877");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("hujf");
+        consumer.setNamesrvAddr("hadoop100:9876");
         //订阅消息 *代表全部
         consumer.subscribe("my-topic", "and||or");
 
