@@ -12,7 +12,7 @@ import org.apache.rocketmq.common.message.Message;
  */
 public class SyncProduce {
     public static  void main(String[] args) throws Exception{
-        DefaultMQProducer producer = new DefaultMQProducer("hujf");
+        DefaultMQProducer producer = new DefaultMQProducer("hujf2");
 
         producer.setNamesrvAddr("hadoop100:9876");
         producer.start();

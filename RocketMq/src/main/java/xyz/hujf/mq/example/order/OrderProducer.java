@@ -29,14 +29,11 @@ public class OrderProducer {
             int orderId = i;
             for(int j=0;j<=5;j++){
                 Message msg = new Message("OrderTopicTest","order_"+orderId,"KEY"+orderId,("order_"+orderId+" step "+j).getBytes(StandardCharsets.UTF_8));
-                SendResult sendResult = producer.send(msg, new MessageQueueSelector() {
-                    @Override
-                    public MessageQueue select(List<MessageQueue> list, Message message, Object o) {
-                        Integer id  =(Integer) o;
-                        int index = id%list.size();
+                SendResult sendResult = producer.send(msg, (list, message, o) -> {
+                    Integer id  =(Integer) o;
+                    int index = id%list.size();
 
-                        return list.get(index);
-                    }
+                    return list.get(index);
                 },orderId);
 
                 System.out.println(sendResult);
