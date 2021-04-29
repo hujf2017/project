@@ -18,8 +18,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @date 2020/10/12 0012上午 9:17
  * @description: TODO
  */
-@EnableCaching
-@Configuration
 public class RedisConfig {
     //设置redis 乱码问题
     @Bean

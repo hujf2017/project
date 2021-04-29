@@ -26,6 +26,8 @@ secure:
       - /login/**
 
 mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations:
     - classpath:dao/*.xml
     - classpath*:com/**/mapper/*.xml
