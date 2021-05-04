@@ -1,0 +1,40 @@
+server:
+  port: 82
+
+spring:
+  application:
+    name: order
+  datasource:
+    url: jdbc:mysql://47.98.129.106:3306/user?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Hujianfeng@1
+    druid:
+      initial-size: 5 #连接池初始化大小
+      min-idle: 10 #最小空闲连接数
+      max-active: 20 #最大连接数
+      web-stat-filter:
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        login-username: druid
+        login-password: druid
+#  redis:
+#    host: 116.62.138.50 # Redis服务器地址
+#    database: 0 # Redis数据库索引（默认为0）
+#    port: 6379 # Redis服务器连接端口
+#    password: # Redis服务器连接密码（默认为空）
+#    timeout: 300ms # 连接超时时间（毫秒）
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: mall-admin-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'Bearer ' #JWT负载中拿到开头
+
+rocketmq:
+  nameServer: 192.168.9.129:9876
+  producer:
+    group: my-group
+
+#eureka:
+#  client:
+#    eureka-server-u-r-l-context: http://localhost:8761/eureka

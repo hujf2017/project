@@ -16,6 +16,7 @@
         <module>RocketMq</module>
         <module>adminservre</module>
         <module>order</module>
+        <module>user</module>
     </modules>
 
     <parent>

@@ -1,7 +1,7 @@
 //package com.hujf.project.basic;
 //
-//import com.hujf.project.config.ExRocketMQTemplate;
-//import org.apache.rocketmq.spring.core.RocketMQTemplate;
+//import org.apache.rocketmq.client.exception.MQClientException;
+//import org.apache.rocketmq.client.producer.DefaultMQProducer;
 //import org.springframework.stereotype.Component;
 //
 //import javax.annotation.Resource;
@@ -16,9 +16,16 @@
 //public class SpringProducer {
 //
 //    @Resource
-//    private RocketMQTemplate template;
+//    private DefaultMQProducer producer;
 //
-//    public void sendMessage (String topic ,String message){
-//        this.template.convertAndSend(topic,message);
+//    public SpringProducer(){
+//        producer.setNamesrvAddr("hadoop100:9876");
+//        try {
+//            producer.start();
+//        } catch (MQClientException e) {
+//            e.printStackTrace();
+//        }
+//
 //    }
+//
 //}

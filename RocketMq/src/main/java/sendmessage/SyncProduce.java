@@ -1,5 +1,6 @@
 package sendmessage;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
@@ -16,7 +17,7 @@ public class SyncProduce {
 
         producer.setNamesrvAddr("hadoop100:9876");
         producer.start();
-
+        JSON
         // 发送消息 三个参数 一个topic名  一个标签 一个内容
         String msg = "我的第一个消息6";
         Message message = new Message("my-topic","and",msg.getBytes("UTF-8"));

@@ -37,7 +37,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.hujf.project.mapper"
                              targetProject="vo\src\main\java"/>
         <!--生成全部表tableName设为%-->
-        <table tableName="my_order">
+        <table tableName="point">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>
